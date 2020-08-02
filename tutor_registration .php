@@ -263,186 +263,186 @@
     ?>
 
     <?php include 'header1.html'; ?>
-    <form id="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-
-        <table>
+    <form action="controller/createStudent.php" method="POST" enctype="multipart/form-data">
+        <form id="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             --------Register----------
-            <tr>
-                <td>
-                    Profile Picture
-                </td>
-                <td>
-                    <form action="" class="proPic" method="POST" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td>
+                        Profile Picture
+                    </td>
+                    <td>
+                        <form action="" class="proPic" method="POST" enctype="multipart/form-data">
 
-                        <img src="ProPic/<?php echo $upload ?>" height="150px">
+                            <img src="ProPic/<?php echo $upload ?>" height="150px">
 
-                        <input type="file" name="fileToUpload" value="img.png">
+                            <input type="file" name="fileToUpload" value="img.png">
+                            <br>
+                            <?php echo $msg; ?></span>
+                            <br>
+                            <input type="submit" value="Upload">
+                        </form>
+                    </td>
+                </tr>
+                <br><br><br><br>
+                <tr>
+                    <td>
+                        Name
+                    </td>
+                    <td>
+                        <input type="text" name="Name" value=<?php echo $Name ?>>
+                        <span class="error">* <?php echo $errName; ?></span>
+                    </td>
+                </tr>
+                <br><br>
+                <tr>
+                    <td>
+                        Password
+                    </td>
+                    <td>
+                        <input type="password" name="Password" value=<?php echo $Password ?>>
+                        <span class="error">* <?php echo $errPassword; ?></span>
+                    </td>
+                </tr>
+                <br><br>
+                <tr>
+                    <td>
+                        Location
+                    </td>
+                    <td>
+                        <select name="Address" id="Address">
+                            <option name="Option">Choose Option</option>
+                            <option name="Mirpur" <?php if ($Address == 'Mirpur') { ?>selected="true" <?php }; ?>>Mirpur</option>
+                            <option name="Kuril" <?php if ($Address == 'Kuril') { ?>selected="true" <?php }; ?>>Kuril</option>
+                        </select>
+                        <span class="error">* <?php echo $errAddress; ?></span>
+                    </td>
+                </tr>
+                <br><br>
+                <tr>
+                    <td>
+                        Email
+                    </td>
+                    <td>
+                        <input type="text" name="Email">
+                        <span class="error">* <?php echo $errEmail; ?></span>
+                    </td>
+
+
+
+                </tr>
+                <br><br>
+                <tr>
+                    <td>
+                        Phone
+                    </td>
+                    <td>
+                        +880
+                        <input type="text" name="Phone" value=<?php echo $Phone ?>>
+                        <span class="error">* <?php echo $errPhone; ?></span>
+                    </td>
+                </tr>
+                <br><br>
+                <tr>
+                    <td>
+                        Gender
+                    </td>
+                    <td>
+                        <input type="radio" name="female" <?php echo (isset($_POST['female']) == 'checked') ?  'checked' : ''; ?>>Female
+                        <input type="radio" name="male" <?php echo (isset($_POST['male']) == 'checked') ?  'checked' : ''; ?>>Male
+                        <input type="radio" name="other" <?php echo (isset($_POST['other']) == 'checked') ?  'checked' : ''; ?>>Other
+                        <span class="error">* <?php echo $errGender; ?></span>
+                    </td>
+                </tr>
+                <br><br>
+                <tr>
+                    <td>
+                        Interested Location
+                    </td>
+                    <td>
+                        <select name="InterestedLocation" id="InterestedLocation">
+                            <option name="Mirpur">Mirpur</option>
+                            <option name="Kuril">Kuril</option>
+                        </select>
+                        <span class="error">* <?php echo $errInterestedLocation; ?></span>
+                    </td>
+                </tr>
+                <br><br>
+                <tr>
+                    <td>
+                        Interested Class
+                    </td>
+                    <td>
+                        <input type="checkbox" name="class1" <?php echo (isset($_POST['class1']) == 'checked') ?  'checked' : ''; ?>>Class 1 - Class 5
+                        <input type="checkbox" name="class6" <?php echo (isset($_POST['class6']) == 'checked') ?  'checked' : ''; ?>>Class 6 - Class 8
+                        <input type="checkbox" name="class9" <?php echo (isset($_POST['class9']) == 'checked') ?  'checked' : ''; ?>>Class 9 - Class 10
+                        <span class="error">* <?php echo $errInterestedClass; ?></span>
+                    </td>
+                </tr>
+                <br><br>
+                <tr>
+                    <td>
+                        Interested Subject
+                    </td>
+                    <td>
+                        <input type="checkbox" name="Bangla" <?php echo (isset($_POST['Bangla']) == 'checked') ?  'checked' : ''; ?>>Bangla
+                        <input type="checkbox" name="English" <?php echo (isset($_POST['English']) == 'checked') ?  'checked' : ''; ?>>English
+                        <input type="checkbox" name="Chemistry" <?php echo (isset($_POST['Chemistry']) == 'checked') ?  'checked' : ''; ?>>Chemistry
+                        <input type="checkbox" name="Physics" <?php echo (isset($_POST['Physics']) == 'checked') ?  'checked' : ''; ?>>Physics
+                        <input type="checkbox" name="Math" <?php echo (isset($_POST['Math']) == 'checked') ?  'checked' : ''; ?>>Math
+                        <input type="checkbox" name="Biology" <?php echo (isset($_POST['Biology']) == 'checked') ?  'checked' : ''; ?>>Biology
+                        <span class="error">* <?php echo $errInterestedSubject; ?></span>
+                    </td>
+                </tr>
+                <br><br>
+                <tr>
+                    <td>
+                        Salary
+                    </td>
+                    <td>
+                        <input type="text" name="SalaryStart" value=<?php echo $SalaryStart ?>> -
+                        <input type="text" name="SalaryEnd" value=<?php echo $SalaryStart ?>>
+                        <span class="error">* <?php echo $errSalary; ?></span>
+                    </td>
+                </tr>
+                <br><br>
+                <tr>
+                    <td>
+                        University Name
+                    </td>
+                    <td>
+                        <input type="text" name="UniversityName">
+                        <span class="error">* <?php echo $errUniversityName; ?></span>
+                    </td>
+                </tr>
+                <br><br>
+                <tr>
+                    <td>
+                        Upload CV
+                    </td>
+                    <td>
                         <br>
-                        <?php echo $msg; ?></span>
+                        <br>
+                        <input type="file" name="fileToUpload2">
+                        <br>
+                        <?php echo $msg2; ?></span>
                         <br>
                         <input type="submit" value="Upload">
-                    </form>
-                </td>
-            </tr>
-            <br><br><br><br>
-            <tr>
-                <td>
-                    Name
-                </td>
-                <td>
-                    <input type="text" name="Name" value=<?php echo $Name ?>>
-                    <span class="error">* <?php echo $errName; ?></span>
-                </td>
-            </tr>
-            <br><br>
-            <tr>
-                <td>
-                    Password
-                </td>
-                <td>
-                    <input type="password" name="Password" value=<?php echo $Password ?>>
-                    <span class="error">* <?php echo $errPassword; ?></span>
-                </td>
-            </tr>
-            <br><br>
-            <tr>
-                <td>
-                    Location
-                </td>
-                <td>
-                    <select name="Address" id="Address">
-                        <option name="Option">Choose Option</option>
-                        <option name="Mirpur" <?php if ($Address == 'Mirpur') { ?>selected="true" <?php }; ?>>Mirpur</option>
-                        <option name="Kuril" <?php if ($Address == 'Kuril') { ?>selected="true" <?php }; ?>>Kuril</option>
-                    </select>
-                    <span class="error">* <?php echo $errAddress; ?></span>
-                </td>
-            </tr>
-            <br><br>
-            <tr>
-                <td>
-                    Email
-                </td>
-                <td>
-                    <input type="text" name="Email">
-                    <span class="error">* <?php echo $errEmail; ?></span>
-                </td>
+                    </td>
+                </tr>
+                <br><br>
+                <tr>
+                    <td>
+                        <br>
+                        <br>
+                        <!--<input type="submit" name="submit" value="Submit" class="submit"> -->
 
-
-
-            </tr>
-            <br><br>
-            <tr>
-                <td>
-                    Phone
-                </td>
-                <td>
-                    +880
-                    <input type="text" name="Phone" value=<?php echo $Phone ?>>
-                    <span class="error">* <?php echo $errPhone; ?></span>
-                </td>
-            </tr>
-            <br><br>
-            <tr>
-                <td>
-                    Gender
-                </td>
-                <td>
-                    <input type="radio" name="female" <?php echo (isset($_POST['female']) == 'checked') ?  'checked' : ''; ?>>Female
-                    <input type="radio" name="male" <?php echo (isset($_POST['male']) == 'checked') ?  'checked' : ''; ?>>Male
-                    <input type="radio" name="other" <?php echo (isset($_POST['other']) == 'checked') ?  'checked' : ''; ?>>Other
-                    <span class="error">* <?php echo $errGender; ?></span>
-                </td>
-            </tr>
-            <br><br>
-            <tr>
-                <td>
-                    Interested Location
-                </td>
-                <td>
-                    <select name="InterestedLocation" id="InterestedLocation">
-                        <option name="Mirpur">Mirpur</option>
-                        <option name="Kuril">Kuril</option>
-                    </select>
-                    <span class="error">* <?php echo $errInterestedLocation; ?></span>
-                </td>
-            </tr>
-            <br><br>
-            <tr>
-                <td>
-                    Interested Class
-                </td>
-                <td>
-                    <input type="checkbox" name="class1" <?php echo (isset($_POST['class1']) == 'checked') ?  'checked' : ''; ?>>Class 1 - Class 5
-                    <input type="checkbox" name="class6" <?php echo (isset($_POST['class6']) == 'checked') ?  'checked' : ''; ?>>Class 6 - Class 8
-                    <input type="checkbox" name="class9" <?php echo (isset($_POST['class9']) == 'checked') ?  'checked' : ''; ?>>Class 9 - Class 10
-                    <span class="error">* <?php echo $errInterestedClass; ?></span>
-                </td>
-            </tr>
-            <br><br>
-            <tr>
-                <td>
-                    Interested Subject
-                </td>
-                <td>
-                    <input type="checkbox" name="Bangla" <?php echo (isset($_POST['Bangla']) == 'checked') ?  'checked' : ''; ?>>Bangla
-                    <input type="checkbox" name="English" <?php echo (isset($_POST['English']) == 'checked') ?  'checked' : ''; ?>>English
-                    <input type="checkbox" name="Chemistry" <?php echo (isset($_POST['Chemistry']) == 'checked') ?  'checked' : ''; ?>>Chemistry
-                    <input type="checkbox" name="Physics" <?php echo (isset($_POST['Physics']) == 'checked') ?  'checked' : ''; ?>>Physics
-                    <input type="checkbox" name="Math" <?php echo (isset($_POST['Math']) == 'checked') ?  'checked' : ''; ?>>Math
-                    <input type="checkbox" name="Biology" <?php echo (isset($_POST['Biology']) == 'checked') ?  'checked' : ''; ?>>Biology
-                    <span class="error">* <?php echo $errInterestedSubject; ?></span>
-                </td>
-            </tr>
-            <br><br>
-            <tr>
-                <td>
-                    Salary
-                </td>
-                <td>
-                    <input type="text" name="SalaryStart" value=<?php echo $SalaryStart ?>> -
-                    <input type="text" name="SalaryEnd" value=<?php echo $SalaryStart ?>>
-                    <span class="error">* <?php echo $errSalary; ?></span>
-                </td>
-            </tr>
-            <br><br>
-            <tr>
-                <td>
-                    University Name
-                </td>
-                <td>
-                    <input type="text" name="UniversityName">
-                    <span class="error">* <?php echo $errUniversityName; ?></span>
-                </td>
-            </tr>
-            <br><br>
-            <tr>
-                <td>
-                    Upload CV
-                </td>
-                <td>
-                    <br>
-                    <br>
-                    <input type="file" name="fileToUpload2">
-                    <br>
-                    <?php echo $msg2; ?></span>
-                    <br>
-                    <input type="submit" value="Upload">
-                </td>
-            </tr>
-            <br><br>
-            <tr>
-                <td>
-                    <br>
-                    <br>
-                    <!--<input type="submit" name="submit" value="Submit" class="submit"> -->
-
-                </td>
-            </tr>
-        </table>
-        <button type="submit" name="submit" value="Submit" class="submit">Submit</button>
+                    </td>
+                </tr>
+            </table>
+            <button type="submit" name="submit" value="Submit" class="submit">Submit</button>
+        </form>
     </form>
-
 
 </body>
 
