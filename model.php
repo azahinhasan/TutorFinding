@@ -37,6 +37,39 @@ VALUES (:Name, :Password, :Address, :Email, :Phone, :Gender, :Bangla, :English, 
         echo $e->getMessage();
     }
 
+    $conn2 = db_conn();
+    $selectQuery2 = "INSERT into login (Email, Password,Type) VALUES (:Email,  :Password, :Type)";
+    try {
+        $stmt = $conn2->prepare($selectQuery2);
+        $stmt->execute([
+            ':Email' => $data['Email'],
+            ':Password' => $data['Password'],
+            ':Type' => $data['Type']
+
+        ]);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+
     $conn = null;
+    $conn2 = null;
     return true;
+}
+
+function showTutor($data)
+{
+    $conn = db_conn();
+    $selectQuery = "SELECT * FROM login where Email = ? and Password = ? and  Type = ?";
+
+    try {
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([
+            $data['Email'], $data['Password'], $data['Type']
+        ]);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $row;
 }

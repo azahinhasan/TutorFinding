@@ -12,16 +12,26 @@
         }
 
         #form {
+            display: block;
             text-align: left;
             display: block;
             position: relative;
-            left: 40%;
-            top: -370px;
+            left: 35%;
+            top: -350px;
+            width: 1000px;
         }
 
         .topnav a.registration {
             background-color: #4caf50;
             color: white;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .pic {
+            border-radius: 20%;
         }
 
         button {
@@ -48,6 +58,8 @@
     $Class1to5 = $Class6to8 = $Class9to10 = $CV = "";
     $Bangla = $English = $Chemistry = $Physics = $Math =  $Biology = "";
     $Verified = "false";
+    $upload = "img.png";
+    $msg = "Not Yet Uploaded";
     $counter = 0;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -185,11 +197,12 @@
         if ($data['ProfilePic'] != null) {
             $counter++;
         }
+
         $target_dir = "ProPic/";
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        $msg = "";
+        $msg = "Not Uplodaed yet";
 
         // Check if image file is a actual image or fake image
         if (isset($_POST["submit"])) {
@@ -284,9 +297,8 @@
         $data['SalaryEnd'] = $_POST['SalaryEnd'];
 
         $data['Verified'] = "false";
+        $data['Type'] = "tutor";
 
-
-        $aa = 2;
         if ($counter > 7) {
             if (addTutor($data)) {
                 echo 'Successfully added!!';
@@ -301,27 +313,24 @@
 
     <?php include 'header1.html'; ?>
 
+    <h2 class="header"><u>Registation For Tutor</u> </h2>
     <form id="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
-
-
-
         <table>
             <tr>
                 <td>
                     Profile Picture
                 </td>
                 <td>
-                    <img src=" ProPic/<?php echo $upload ?>" height="150px">
+                    <img class="pic" src=" ProPic/<?php echo $upload ?>" height="170x">
                     <br>
                     <input type="file" name="fileToUpload" />
                     <br>
                     <?php echo $msg; ?></span>
                     <br>
 
-
                 </td>
             </tr>
-            <br><br><br><br>
+            <br><br>
             <tr>
                 <td>
                     Name
@@ -476,7 +485,7 @@
         </table>
         <button type="submit" name="submit" value="submit" class="submit">Submit</button>
     </form>
-
+    <?php include 'footer.php'; ?>
 </body>
 
 </html>
