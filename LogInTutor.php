@@ -78,10 +78,13 @@
         $aa = 2;
         // if ($counter > 7) {
         if (showTutor($data) != null) {
-            header("Location: AfterRegTutor.php");
+            session_start();
+            $_SESSION["emailForUpdatePass"] = $_POST['Email'];
+            $_SESSION["passForUpdatePass"] = $_POST['Password'];
+            // header("Location: AfterRegTutor.php");
+            header("Location: updatePass.php");
             exit();
         } else {
-            echo 'You are not allowed to access this page.';
         }
         //}
     }

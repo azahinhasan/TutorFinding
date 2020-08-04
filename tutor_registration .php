@@ -71,17 +71,23 @@
             $Name = $_POST["Name"];
             $counter++;
         }
+        $data2['Password'] = $_POST["Password"];
         if (empty($_POST["Password"])) {
             $errPassword = "Password is required";
+        } elseif (checkPass($data2) != null) {
+            $errPassword = "Password  Already Used";
         } else {
             $Password = $_POST["Password"];
             $counter++;
         }
 
+        $data1['Email'] = $_POST["Email"];
         if (empty($_POST["Email"])) {
             $errEmail = "Email is required";
         } elseif (filter_var($Email, FILTER_VALIDATE_EMAIL)) {
             $errEmail = "Invalid email format";
+        } elseif (checkEmail($data1) != null) {
+            $errEmail = "Email is Already Sign Up";
         } else {
             $email = $_POST["Email"];
             $counter++;
@@ -252,40 +258,32 @@
         }
 
         //--------------------------OtherFile
-        $data['CV'] = basename($_FILES["fileToUpload2"]["name2"]);
-        $target_dir2 = "OtherFiles/";
-        $target_file2 = $target_dir2 . basename($_FILES["fileToUpload2"]["name2"]);
-        $uploadOk2 = 1;
-        $imageFileType2 = strtolower(pathinfo($target_dir2, PATHINFO_EXTENSION));
-        $msg2 = "";
 
+        $errors = array();
+        $file_name = $_FILES['image']['name'];
+        $file_size = $_FILES['image']['size'];
+        $file_tmp = $_FILES['image']['tmp_name'];
+        $file_type = $_FILES['image']['type'];
+        $file_ext = strtolower(end(explode('.', $_FILES['image']['name'])));
 
-        // Check file size
-        if ($_FILES["fileToUpload2"]["size"] > 500000) {
-            $msg2 =  "Sorry, your file is too large.";
-            $uploadOk2 = 0;
+        $extensions = array("pdf", "docx", "png");
+
+        if (in_array($file_ext, $extensions) === false) {
+            $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
         }
 
-        // Allow certain file formats
-        if ($imageFileType2 != "pdf" && $imageFileType2 != "docx") {
-            $msg2 =  "Sorry, only Doc and Pdf files are allowed.";
-            $uploadOk2 = 0;
+        if ($file_size > 209715002) {
+            $errors[] = 'File size must be excately 2 MB';
         }
 
-        // Check if $uploadOk is set to 0 by an error
-        $CV = basename($_FILES["fileToUpload2"]["name2"]);
-        if ($uploadOk2 == 0) {
-            $msg2 =  "Sorry, your file was not uploaded.";
-            // if everything is ok, try to upload file
+        if (empty($errors) == true) {
+            move_uploaded_file($file_tmp, "OtherFiles/" . $file_name);
+            $data['CV'] = "OtherFiles/" . $file_name;
+            echo "Success";
         } else {
-            if (move_uploaded_file($_FILES["fileToUpload2"]["tmp_name2"], $target_dir2)) {
-                $msg2 =  "The file " . basename($_FILES["fileToUpload2"]["name"]) . " has been uploaded.";
-                //$msg = $fileToUpload2;
-                $upload = basename($_FILES["fileToUpload2"]["name2"]);
-            } else {
-                $msg2 =  "Sorry, there was an error uploading your file.";
-            }
+            print_r($errors);
         }
+
 
 
         $data['Name'] = $_POST['Name'];
@@ -319,6 +317,8 @@
             <tr>
                 <td>
                     Profile Picture
+                    <br>
+                    <br>
                 </td>
                 <td>
                     <img class="pic" src=" ProPic/<?php echo $upload ?>" height="170x">
@@ -327,33 +327,43 @@
                     <br>
                     <?php echo $msg; ?></span>
                     <br>
-
+                    <br>
                 </td>
             </tr>
             <br><br>
             <tr>
                 <td>
                     Name
+                    <br>
+                    <br>
                 </td>
                 <td>
                     <input type="text" name="Name" value=<?php echo $Name ?>>
                     <span class="error">* <?php echo $errName; ?></span>
+                    <br>
+                    <br>
                 </td>
             </tr>
             <br><br>
             <tr>
                 <td>
                     Password
+                    <br>
+                    <br>
                 </td>
                 <td>
                     <input type="password" name="Password" value=<?php echo $Password ?>>
                     <span class="error">* <?php echo $errPassword; ?></span>
+                    <br>
+                    <br>
                 </td>
             </tr>
             <br><br>
             <tr>
                 <td>
                     Location
+                    <br>
+                    <br>
                 </td>
                 <td>
                     <select name="Address">
@@ -362,16 +372,22 @@
                         <option name="Kuril" <?php if ($Address == 'Kuril') { ?>selected="true" <?php }; ?>>Kuril</option>
                     </select>
                     <span class="error">* <?php echo $errAddress; ?></span>
+                    <br>
+                    <br>
                 </td>
             </tr>
             <br><br>
             <tr>
                 <td>
                     Email
+                    <br>
+                    <br>
                 </td>
                 <td>
                     <input type="text" name="Email">
                     <span class="error">* <?php echo $errEmail; ?></span>
+                    <br>
+                    <br>
                 </td>
 
 
@@ -381,29 +397,38 @@
             <tr>
                 <td>
                     Phone
+                    <br>
+                    <br>
                 </td>
                 <td>
-                    +880
+                    +88
                     <input type="text" name="Phone" value=<?php echo $Phone ?>>
                     <span class="error">* <?php echo $errPhone; ?></span>
+                    <br>
+                    <br>
                 </td>
             </tr>
             <br><br>
             <tr>
                 <td>
                     Gender
+                    <br>
+                    <br>
                 </td>
                 <td>
                     <input type="radio" name="female" <?php echo (isset($_POST['female']) == 'checked') ?  'checked' : ''; ?>>Female
                     <input type="radio" name="male" <?php echo (isset($_POST['male']) == 'checked') ?  'checked' : ''; ?>>Male
-                    <input type="radio" name="other" <?php echo (isset($_POST['other']) == 'checked') ?  'checked' : ''; ?>>Other
                     <span class="error">* <?php echo $errGender; ?></span>
+                    <br>
+                    <br>
                 </td>
             </tr>
             <br><br>
             <tr>
                 <td>
                     Interested Location
+                    <br>
+                    <br>
                 </td>
                 <td>
                     <select name="InterestedLocation" id="InterestedLocation">
@@ -411,24 +436,32 @@
                         <option name="Kuril">Kuril</option>
                     </select>
                     <span class="error">* <?php echo $errInterestedLocation; ?></span>
+                    <br>
+                    <br>
                 </td>
             </tr>
             <br><br>
             <tr>
                 <td>
                     Interested Class
+                    <br>
+                    <br>
                 </td>
                 <td>
                     <input type="checkbox" name="class1to5" <?php echo (isset($_POST['class1to5']) == 'checked') ?  'checked' : ''; ?>>Class 1 - Class 5
                     <input type="checkbox" name="class6to8" <?php echo (isset($_POST['class6to8']) == 'checked') ?  'checked' : ''; ?>>Class 6 - Class 8
                     <input type="checkbox" name="class9to10" <?php echo (isset($_POST['class9to10']) == 'checked') ?  'checked' : ''; ?>>Class 9 - Class 10
                     <span class="error">* <?php echo $errInterestedClass; ?></span>
+                    <br>
+                    <br>
                 </td>
             </tr>
             <br><br>
             <tr>
                 <td>
                     Interested Subject
+                    <br>
+                    <br>
                 </td>
                 <td>
                     <input type="checkbox" name="Bangla" <?php echo (isset($_POST['Bangla']) == 'checked') ?  'checked' : ''; ?>>Bangla
@@ -438,47 +471,55 @@
                     <input type="checkbox" name="Math" <?php echo (isset($_POST['Math']) == 'checked') ?  'checked' : ''; ?>>Math
                     <input type="checkbox" name="Biology" <?php echo (isset($_POST['Biology']) == 'checked') ?  'checked' : ''; ?>>Biology
                     <span class="error">* <?php echo $errInterestedSubject; ?></span>
+                    <br>
+                    <br>
                 </td>
             </tr>
             <br><br>
             <tr>
                 <td>
                     Salary
+                    <br>
+                    <br>
                 </td>
                 <td>
                     <input type="text" name="SalaryStart" value=<?php echo $SalaryStart ?>> -
                     <input type="text" name="SalaryEnd" value=<?php echo $SalaryStart ?>>
                     <span class="error">* <?php echo $errSalary; ?></span>
+                    <br>
+                    <br>
                 </td>
             </tr>
             <br><br>
             <tr>
                 <td>
                     University Name
+                    <br>
+                    <br>
                 </td>
                 <td>
                     <input type="text" name="UniversityName">
                     <span class="error">* <?php echo $errUniversityName; ?></span>
+                    <br>
+                    <br>
                 </td>
             </tr>
             <br><br>
             <tr>
                 <td>
                     Upload CV
+                    <br>
+                    <br>
                 </td>
                 <td>
-                    <input type="file" name="fileToUpload2" />
+                    <input type="file" name="image" />
                     <br>
-                    <?php echo $msg2; ?></span>
                     <br>
                 </td>
             </tr>
             <br><br>
             <tr>
                 <td>
-                    <br>
-                    <br>
-                    <!--<input type="submit" name="submit" value="Submit" class="submit"> -->
 
                 </td>
             </tr>

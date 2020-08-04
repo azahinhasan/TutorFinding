@@ -59,7 +59,7 @@ VALUES (:Name, :Password, :Address, :Email, :Phone, :Gender, :Bangla, :English, 
 function showTutor($data)
 {
     $conn = db_conn();
-    $selectQuery = "SELECT * FROM login where Email = ? and Password = ? and  Type = ?";
+    $selectQuery = "SELECT * FROM login where Email = ? and Password = ? and  Type = ? ";
 
     try {
         $stmt = $conn->prepare($selectQuery);
@@ -72,4 +72,57 @@ function showTutor($data)
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     return $row;
+}
+
+function checkPass($data)
+{
+    $conn = db_conn();
+    $selectQuery = "SELECT * FROM login where  Password = ?";
+
+    try {
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([
+            $data['Password']
+        ]);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $row;
+}
+
+function checkEmail($data)
+{
+    $conn = db_conn();
+    $selectQuery = "SELECT * FROM login where  Email = ?";
+
+    try {
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([
+            $data['Email']
+        ]);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $row;
+}
+
+function updatePass($data)
+{
+    $conn = db_conn();
+    $selectQuery = "UPDATE login set Password = ? where Email = ?";
+    try {
+        $stmt = $conn->prepare($selectQuery);
+        $stmt->execute([
+            $data['Password'], $data['Email']
+        ]);
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+
+    $conn = null;
+    return true;
 }
