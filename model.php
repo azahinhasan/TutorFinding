@@ -38,13 +38,14 @@ VALUES (:Name, :Password, :Address, :Email, :Phone, :Gender, :Bangla, :English, 
     }
 
     $conn2 = db_conn();
-    $selectQuery2 = "INSERT into login (Email, Password,Type) VALUES (:Email,  :Password, :Type)";
+    $selectQuery2 = "INSERT into login (Email, Password,Type,Verified) VALUES (:Email,  :Password, :Type, :Verified)";
     try {
         $stmt = $conn2->prepare($selectQuery2);
         $stmt->execute([
             ':Email' => $data['Email'],
             ':Password' => $data['Password'],
-            ':Type' => $data['Type']
+            ':Type' => $data['Type'],
+            ':Verified' => $data['Verified']
 
         ]);
     } catch (PDOException $e) {
@@ -59,12 +60,12 @@ VALUES (:Name, :Password, :Address, :Email, :Phone, :Gender, :Bangla, :English, 
 function showTutor($data)
 {
     $conn = db_conn();
-    $selectQuery = "SELECT * FROM login where Email = ? and Password = ? and  Type = ? ";
+    $selectQuery = "SELECT * FROM login where Email = ? and Password = ? and  Type = ? and  Verified = ?";
 
     try {
         $stmt = $conn->prepare($selectQuery);
         $stmt->execute([
-            $data['Email'], $data['Password'], $data['Type']
+            $data['Email'], $data['Password'], $data['Type'], $data['Verified']
         ]);
     } catch (PDOException $e) {
         echo $e->getMessage();

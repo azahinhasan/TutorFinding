@@ -22,7 +22,7 @@
         }
 
         .topnav a.registration {
-            background-color: #4caf50;
+            background-color: #008CBA;
             color: white;
         }
 
@@ -63,7 +63,6 @@
     $counter = 0;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
 
         if (empty($_POST["Name"])) {
             $errName = "Name is required";
@@ -116,18 +115,17 @@
             if (isset($_POST["female"])) {
                 $Gender = "Female";
                 $data['Gender'] = "Female";
-                $counter++;
             } elseif (isset($_POST["male"])) {
-                $Gender =
-                    $data['Gender'] = "Male";
-                $counter++;
+                $Gender = $data['Gender'] = "Male";
             }
+            $counter++;
         }
 
         if (empty($_POST["Bangla"]) && empty($_POST["English"]) && empty($_POST["Chemistry"]) && empty($_POST["Physics"]) && empty($_POST["Math"]) && empty($_POST["Biology"])) {
             $errInterestedSubject = "Interested Subject is required";
         } else {
-
+            $counter++;
+            $Bangla = $English = $Chemistry = $Physics = $Math =  $Biology = "no";
             if (isset($_POST["Bangla"])) {
                 $data['Bangla'] = "yes";
                 $Bangla = "yes";
@@ -163,7 +161,7 @@
             $errInterestedClass = "Class is required";
         } else {
             $Class1to5 = $Class6to8 = $Class9to10 = "no";
-
+            $counter++;
             if (isset($_POST["class1to5"])) {
                 $data['Class1to5'] = "yes";
             }
@@ -184,9 +182,6 @@
             $SalaryEnd = $_POST["SalaryEnd"];
             $counter++;
         }
-
-
-
 
 
         function test_input($data)
@@ -278,7 +273,10 @@
 
         if (empty($errors) == true) {
             move_uploaded_file($file_tmp, "OtherFiles/" . $file_name);
-            $data['CV'] = "OtherFiles/" . $file_name;
+            $data['CV'] = $file_name;
+            if ($data['CV'] != null) {
+                $counter++;
+            }
             echo "Success";
         } else {
             print_r($errors);
@@ -297,7 +295,7 @@
         $data['Verified'] = "false";
         $data['Type'] = "tutor";
 
-        if ($counter > 7) {
+        if ($counter == 11) {
             if (addTutor($data)) {
                 echo 'Successfully added!!';
                 header("Location: AfterRegTutor.php");
@@ -384,7 +382,7 @@
                     <br>
                 </td>
                 <td>
-                    <input type="text" name="Email">
+                    <input type="text" name="Email" value=<?php echo $Email ?>>
                     <span class="error">* <?php echo $errEmail; ?></span>
                     <br>
                     <br>
@@ -526,7 +524,8 @@
         </table>
         <button type="submit" name="submit" value="submit" class="submit">Submit</button>
     </form>
-    <?php include 'footer.php'; ?>
+
 </body>
+<?php include 'footer.php'; ?>
 
 </html>

@@ -6,13 +6,14 @@
     <style>
         #bb {
             display: block;
-            border: 2px outset black;
+            border: 2px solid #008CBA;
             text-align: center;
-            bottom: 100%;
             position: fixed;
             left: 0;
             bottom: 0;
             width: 100%;
+            bottom: 0;
+
 
         }
     </style>
