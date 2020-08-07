@@ -31,25 +31,38 @@
             color: white;
         }
 
-        button {
-            background-color: white;
-            color: black;
-            border: 2px solid #008CBA;
-            padding: 12px 28px;
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 16px 32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 20px;
-            margin: 3px 1px;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
             cursor: pointer;
-            width: 300px;
+            width: 280px;
+        }
+
+
+        .button2 {
+            background-color: white;
+            color: black;
+            border: 2px solid #008CBA;
+        }
+
+        .button2:hover {
+            background-color: #008CBA;
+            color: white;
         }
     </style>
 </head>
 
 <body>
     <?php
-    require_once './model.php';
+    require_once './model_z.php';
     $Name = $Address = $ProfilePic = $Email = $Phone = $SalaryStart = $SalaryEnd = $Gender = $InterestedLocation = $InterestedClass = $InterestedSubject = $UniversityName = $Salary = $CV = $Certificate = $Password = "";
     $errName = $errAddress = $errProfilePic = $errEmail = $errPhone = $errGender = $errInterestedLocation = $errInterestedClass = $errInterestedSubject = $errUniversityName = $errSalary = $errCV = $errCertificate = $errPassword = "";
     $Class1to5 = $Class6to8 = $Class9to10 = $CV = "";
@@ -167,7 +180,7 @@
         <span class="error"><?php echo $errMsg; ?></span>
         <br>
         <br>
-        <button type="submit" name="submit" value="submit" class="submit">Login</button>
+        <button type="submit" class="button button2" name="submit" value="submit" class="submit">Login</button>
     </form>
 
 </body>

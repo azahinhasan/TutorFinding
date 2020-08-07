@@ -52,13 +52,14 @@
 
 <body>
     <?php
-    require_once './model.php';
+    require_once './model_z.php';
     $Name = $Address = $ProfilePic = $Email = $Phone = $SalaryStart = $SalaryEnd = $Gender = $InterestedLocation = $InterestedClass = $InterestedSubject = $UniversityName = $Salary = $CV = $Certificate = $Password = "";
     $errName = $errAddress = $errProfilePic = $errEmail = $errPhone = $errGender = $errInterestedLocation = $errInterestedClass = $errInterestedSubject = $errUniversityName = $errSalary = $errCV = $errCertificate = $errPassword = "";
     $Class1to5 = $Class6to8 = $Class9to10 = $CV = "";
     $Bangla = $English = $Chemistry = $Physics = $Math =  $Biology = "";
     $Verified = "false";
     $upload = "img.png";
+    $u = 0;
     $msg = "Not Yet Uploaded";
     $counter = 0;
 
@@ -125,7 +126,7 @@
             $errInterestedSubject = "Interested Subject is required";
         } else {
             $counter++;
-            $Bangla = $English = $Chemistry = $Physics = $Math =  $Biology = "no";
+            $data['Bangla'] = $data['English'] = $data['Chemistry'] = $data['Physics'] = $data['Math'] =  $data['Biology'] = "no";
             if (isset($_POST["Bangla"])) {
                 $data['Bangla'] = "yes";
                 $Bangla = "yes";
@@ -160,7 +161,7 @@
         if (empty($_POST["class1to5"]) && empty($_POST["class6to8"]) && empty($_POST["class9to10"])) {
             $errInterestedClass = "Class is required";
         } else {
-            $Class1to5 = $Class6to8 = $Class9to10 = "no";
+            $data['Class1to5'] = $data['Class6to8'] = $data['Class9to10'] = "no";
             $counter++;
             if (isset($_POST["class1to5"])) {
                 $data['Class1to5'] = "yes";
@@ -291,7 +292,7 @@
         $data['Phone'] = $_POST['Phone'];
         $data['SalaryStart'] = $_POST['SalaryStart'];
         $data['SalaryEnd'] = $_POST['SalaryEnd'];
-
+        $data['UniversityName'] = $_POST['UniversityName'];
         $data['Verified'] = "false";
         $data['Type'] = "tutor";
 
@@ -476,13 +477,13 @@
             <br><br>
             <tr>
                 <td>
-                    Salary
+                    Salary (Range)
                     <br>
                     <br>
                 </td>
                 <td>
-                    <input type="text" name="SalaryStart" value=<?php echo $SalaryStart ?>> -
-                    <input type="text" name="SalaryEnd" value=<?php echo $SalaryStart ?>>
+                    <input type="number" min="0" max="999999" name="SalaryStart" value=<?php echo $SalaryStart ?>> -
+                    <input type="number" min="1" max="999999" name="SalaryEnd" value=<?php echo $SalaryStart ?>>
                     <span class="error">* <?php echo $errSalary; ?></span>
                     <br>
                     <br>

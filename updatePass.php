@@ -17,7 +17,7 @@
 
 <body>
     <?php
-    require_once './model.php';
+    require_once './model_z.php';
     //require_once './LoginTutor.php';
     session_start();
     $cPassword = $nPassword = $rPassword =  $cPasswordErr = $nPasswordErr = $rPasswordErr = "";

@@ -7,8 +7,8 @@ require_once 'db_connect.php';
 function addTutor($data)       //Done
 {
     $conn = db_conn();
-    $selectQuery = "INSERT into dbtutor (Name, Password, Address, Email, Phone, Gender, Bangla, English, Chemistry, Physics, Math, Biology, Class1to5, Class6to8, Class9to10, SalaryStart ,SalaryEnd,ProfilePic, CV,Verified)
-VALUES (:Name, :Password, :Address, :Email, :Phone, :Gender, :Bangla, :English, :Chemistry, :Physics, :Math, :Biology, :Class1to5, :Class6to8, :Class9to10, :SalaryStart, :SalaryEnd, :ProfilePic,:CV, :Verified)";
+    $selectQuery = "INSERT into dbtutor (Name, Password, Address, Email, Phone, Gender, Bangla, English, Chemistry, Physics, Math, Biology, Class1to5, Class6to8, Class9to10, SalaryStart ,SalaryEnd,ProfilePic, CV,Verified,UniversityName)
+VALUES (:Name, :Password, :Address, :Email, :Phone, :Gender, :Bangla, :English, :Chemistry, :Physics, :Math, :Biology, :Class1to5, :Class6to8, :Class9to10, :SalaryStart, :SalaryEnd, :ProfilePic,:CV, :Verified,:UniversityName)";
     try {
         $stmt = $conn->prepare($selectQuery);
         $stmt->execute([
@@ -31,7 +31,8 @@ VALUES (:Name, :Password, :Address, :Email, :Phone, :Gender, :Bangla, :English, 
             ':SalaryEnd' => $data['SalaryEnd'],
             ':Verified' => $data['Verified'],
             ':ProfilePic' => $data['ProfilePic'],
-            ':CV' => $data['CV']
+            ':CV' => $data['CV'],
+            ':UniversityName' => $data['UniversityName']
         ]);
     } catch (PDOException $e) {
         echo $e->getMessage();
