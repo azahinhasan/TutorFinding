@@ -1,20 +1,17 @@
 <!DOCTYPE HTML>
 <html>
 
+
 <head>
+
     <style>
         .error {
             color: #FF0000;
         }
 
-        #date {
-            width: 27px;
-        }
-
         #form {
             display: block;
             text-align: left;
-            display: block;
             position: relative;
             left: 35%;
             top: -350px;
@@ -48,11 +45,13 @@
             width: 500px;
         }
     </style>
+
 </head>
 
 <body>
     <?php
     require_once './model_z.php';
+    include 'header1.html';
     $Name = $Address = $ProfilePic = $Email = $Phone = $SalaryStart = $SalaryEnd = $Gender = $InterestedLocation = $InterestedClass = $InterestedSubject = $UniversityName = $Salary = $CV = $Certificate = $Password = "";
     $errName = $errAddress = $errProfilePic = $errEmail = $errPhone = $errGender = $errInterestedLocation = $errInterestedClass = $errInterestedSubject = $errUniversityName = $errSalary = $errCV = $errCertificate = $errPassword = "";
     $Class1to5 = $Class6to8 = $Class9to10 = $CV = "";
@@ -60,7 +59,7 @@
     $Verified = "false";
     $upload = "img.png";
     $u = 0;
-    $msg = "Not Yet Uploaded";
+    $msg = "";
     $counter = 0;
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -204,7 +203,7 @@
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-        $msg = "Not Uplodaed yet";
+        $msg = "";
 
         // Check if image file is a actual image or fake image
         if (isset($_POST["submit"])) {
@@ -308,7 +307,7 @@
     }
     ?>
 
-    <?php include 'header1.html'; ?>
+
 
     <h2 class="header"><u>Registation For Tutor</u> </h2>
     <form id="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
@@ -367,8 +366,9 @@
                 <td>
                     <select name="Address">
                         <option name="Option">Choose Option</option>
+                        <option name="Mirpur" <?php if ($Address == 'Banani') { ?>selected="true" <?php }; ?>>Banani</option>
                         <option name="Mirpur" <?php if ($Address == 'Mirpur') { ?>selected="true" <?php }; ?>>Mirpur</option>
-                        <option name="Kuril" <?php if ($Address == 'Kuril') { ?>selected="true" <?php }; ?>>Kuril</option>
+                        <option name="Kuril" <?php if ($Address == 'Uttara') { ?>selected="true" <?php }; ?>>Uttara</option>
                     </select>
                     <span class="error">* <?php echo $errAddress; ?></span>
                     <br>
@@ -431,8 +431,10 @@
                 </td>
                 <td>
                     <select name="InterestedLocation" id="InterestedLocation">
-                        <option name="Mirpur">Mirpur</option>
-                        <option name="Kuril">Kuril</option>
+                        <option name="Option">Choose Option</option>
+                        <option name="Mirpur" <?php if ($Address == 'Banani') { ?>selected="true" <?php }; ?>>Banani</option>
+                        <option name="Mirpur" <?php if ($Address == 'Mirpur') { ?>selected="true" <?php }; ?>>Mirpur</option>
+                        <option name="Kuril" <?php if ($Address == 'Uttara') { ?>selected="true" <?php }; ?>>Uttara</option>
                     </select>
                     <span class="error">* <?php echo $errInterestedLocation; ?></span>
                     <br>
@@ -498,7 +500,7 @@
                 </td>
                 <td>
                     <input type="text" name="UniversityName">
-                    <span class="error">* <?php echo $errUniversityName; ?></span>
+                    <span class="error"><?php echo $errUniversityName; ?></span>
                     <br>
                     <br>
                 </td>
@@ -516,17 +518,11 @@
                     <br>
                 </td>
             </tr>
-            <br><br>
-            <tr>
-                <td>
-
-                </td>
-            </tr>
         </table>
         <button type="submit" name="submit" value="submit" class="submit">Submit</button>
     </form>
 
 </body>
-<?php include 'footer.php'; ?>
+<?php include 'footer2.php'; ?>
 
 </html>

@@ -44,6 +44,7 @@
             transition-duration: 0.4s;
             cursor: pointer;
             width: 280px;
+            border-radius: 10%;
         }
 
 
@@ -98,14 +99,13 @@
             session_start();
             $_SESSION["emailForUpdatePass"] = $_POST['Email'];
             $_SESSION["passForUpdatePass"] = $_POST['Password'];
-            // header("Location: AfterRegTutor.php");
             if ($_POST['Type'] == "tutor") {
                 header("Location: updatePass.php");
                 exit();
             } elseif ($_POST['Type'] == "admin") {
                 //header("Location: updatePass.php");
                 exit();
-            } elseif ($_POST['Type'] == "student") {
+            } elseif ($_POST['Type'] == "parent") {
                 //header("Location: updatePass.php");
                 exit();
             }
@@ -120,7 +120,6 @@
     <?php include 'header1.html'; ?>
 
     <form id="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-
         <table>
             <tr>
                 <td>
@@ -130,7 +129,7 @@
                     <select name="Type" id="Type">
                         <option name="Admin">admin</option>
                         <option name="Tutor">tutor</option>
-                        <option name="Tutor">tutor</option>
+                        <option name="Parent">parent</option>
                     </select>
                 </td>
             </tr>

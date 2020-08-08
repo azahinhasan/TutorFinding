@@ -11,6 +11,18 @@
             width: 27px;
         }
 
+
+        #form {
+            display: block;
+            text-align: left;
+            display: block;
+
+            position: relative;
+            left: 35%;
+            top: 0;
+            font-size: 18px;
+
+
         }
     </style>
 </head>
