@@ -64,5 +64,6 @@
         <a href="tutor_registration .php"><button class="button button2">Tutor</button></a>
     </span>
 </body>
+<?php include 'footer.php'; ?>
 
 </html>

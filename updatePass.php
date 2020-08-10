@@ -11,7 +11,6 @@
             width: 27px;
         }
 
-
         #form {
             display: block;
             text-align: left;
@@ -91,7 +90,7 @@
         return $data;
     }
     ?>
-
+    <?php include "headerTutorHome.html"; ?>
     <dev class="main">
         <form id="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <table>
@@ -134,5 +133,6 @@
         </form>
     </dev>
 </body>
+<?php include "footer.php"; ?>
 
 </html>

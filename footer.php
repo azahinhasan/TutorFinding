@@ -28,9 +28,9 @@
         require_once './model_z.php';
         echo "<p>Copyright &copy; 2017";
         ?>
-        <a class="Registration" href="#">About Us |</a>
-        <a class="login" href="#">FAQ |</a>
-        <a class="home" href="#">Contact Us</a>
+        <a class="" href="">About Us |</a>
+        <a class="" href="#">FAQ |</a>
+        <a class="" href="tazin/contactUs.php">Contact Us</a>
     </span>
 </body>
 

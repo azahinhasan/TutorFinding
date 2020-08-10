@@ -64,6 +64,7 @@
 <body>
     <?php
     require_once './model_z.php';
+    session_start();
     $Name = $Address = $ProfilePic = $Email = $Phone = $SalaryStart = $SalaryEnd = $Gender = $InterestedLocation = $InterestedClass = $InterestedSubject = $UniversityName = $Salary = $CV = $Certificate = $Password = "";
     $errName = $errAddress = $errProfilePic = $errEmail = $errPhone = $errGender = $errInterestedLocation = $errInterestedClass = $errInterestedSubject = $errUniversityName = $errSalary = $errCV = $errCertificate = $errPassword = "";
     $Class1to5 = $Class6to8 = $Class9to10 = $CV = "";
@@ -96,18 +97,14 @@
 
         // if ($counter > 7) {
         if (showTutor($data) != null) {
-            session_start();
             $_SESSION["emailForUpdatePass"] = $_POST['Email'];
             $_SESSION["passForUpdatePass"] = $_POST['Password'];
+
             if ($_POST['Type'] == "tutor") {
-                header("Location: updatePass.php");
-                exit();
+                header("Location:tazin/tutorHome.php");
+                die;
             } elseif ($_POST['Type'] == "admin") {
-                //header("Location: updatePass.php");
-                exit();
             } elseif ($_POST['Type'] == "parent") {
-                //header("Location: updatePass.php");
-                exit();
             }
         } else {
             $errMsg = "Email or Password is Wrong or may be you are not Verified yet!";
